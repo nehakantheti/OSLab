@@ -13,15 +13,15 @@ int main(){
     if(process1 < 0){       // Error!
         printf("Error!");
     }else if(process1 > 0){ // Parent process
-        childPID1 = wait(&status1);
+        // childPID1 = wait(&status1);
         // childPID1 = wait(NULL);
-        // childPID1 = waitpid(process1, &status1, 0);
+        childPID1 = waitpid(process1, &status1, 0);
         
         process2 = fork();
         
-        childPID2 = wait(&status2);
+        // childPID2 = wait(&status2);
         // childPID2 = wait(NULL);
-        // childPID1 = waitpid(process2, &status2, 0);
+        childPID1 = waitpid(process2, &status2, 0);
 
         
     

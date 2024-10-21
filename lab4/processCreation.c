@@ -19,7 +19,7 @@ int main(){
 
     if(p1 < 0){     // Error in creating in process
         printf("Error!\n");
-    }else if(p1 > 0){
+    }else if(p1 > 0){   // Parent Process
         for(int i = 0;i< MAX_SIZE;i++){
             input[i]-=5;
         }
@@ -33,7 +33,8 @@ int main(){
         printf("Minimum Element : %d\n", minn);
 
         printf("Process id : %d and Parent Id : %d\n", getpid(), getppid());
-    }else{
+    }else{      // Child process if pid = 0
+    printf("Child process:\n");
         for(int i = 0;i< MAX_SIZE;i++){
             input[i]+=2;
         }
