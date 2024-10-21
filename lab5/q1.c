@@ -13,7 +13,7 @@ int main(){
     pid = fork();
     int shmid;
     key_t key = 1505;
-    int* s;
+    int* s;     // dummy pointer to read the value in shared mem
     int* shm;  //to read shm's address
     if(pid < 0){    //Error
         printf("Error!");
@@ -32,6 +32,7 @@ int main(){
         shm = shmat(shmid, NULL, 0);    //Attaching SHM in child process.
         if(shm == (int*)-1){
             perror("shmattttt");
+            perror("Error in creating shared memory!\n");
             exit(1);
         }
         printf("-----SHM Address in child %p-----\n", shm);
@@ -57,7 +58,7 @@ int main(){
             exit(1);
         }
         printf("---------------Shared Memory id : %d------------------\n", shmid);
-        // If you waitis commented out, the parent process will not wait for the child to finish.
+        // If wait is commented out, the parent process will not wait for the child to finish.
         // This may lead to a race condition where the parent process tries to access the shared memory before the child has finished writing data.
         // As a result, the parent may read incomplete or incorrect data from the shared memory.
         //Parent process also removes shared memory, which then leads to segmentation fault for accessing non existent memory.

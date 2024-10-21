@@ -25,10 +25,11 @@ int main(){
         perror("Error in forking!\n");
         exit(1);
     }else if(pid == 0){
+        // Creating 2nd pipe
         if (pipe(pipe2) == -1) {
-        perror("Pipe creation failed");
-        exit(1);
-    }
+            perror("Pipe creation failed");
+            exit(1);
+        }
         int childPid = fork();
         if(childPid < 0){
             perror("Error in forking grnad child process!");
@@ -72,7 +73,7 @@ int main(){
             close(pipe2[0]);
 
             printf("Message from grand child - %s\n", grandmsg);
-            printf("Message from parent child - %s\n", readmsg);
+            printf("Message from parent - %s\n", readmsg);
             int grandchild_len = strlen(grandmsg);
             int parent_len = strlen(readmsg);
             if (readmsg[parent_len - 1] == '\n') parent_len--;

@@ -19,13 +19,14 @@ int main() {
         exit(1);
     }
 
+    // Fork only after creating the pipe.
     pid = fork();
     if (pid < 0) {  // Error in fork
         perror("Fork failed");
         exit(1);
     } 
     else if (pid == 0) {  // Child process
-        sleep(2);
+        sleep(7);
         printf("In child process\n");
         close(pipefds[1]);  // Close the write end in child
         // 1. If close is commented out, the write end remains open. This can lead to blocking issues 
@@ -47,8 +48,8 @@ int main() {
         printf("In parent process\n");
         printf("Enter a string to pass to parent process: ");
         char input[BUFFER_SIZE];
-        // fgets(input, sizeof(input), stdin);
-        scanf("%s", input);
+        fgets(input, sizeof(input), stdin);
+        // scanf("%s", input);
         // input[strcspn(input, "\n")] = '\0';  // Remove newline character
 
         ssize_t bytesWritten = write(pipefds[1], input, strlen(input) + 1);
