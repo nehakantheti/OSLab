@@ -6,6 +6,7 @@
 #include<sys/signal.h>
 #include<sys/shm.h>
 #include<string.h>
+#include<sys/types.h>
 #define SHM_SIZE 10*sizeof(struct process)
 
 int n;
