@@ -14,7 +14,8 @@ void handle_sigfpe(int sig) {
 
 void handle_sigint(int sig) {
     printf("\nChild: Caught SIGINT (Ctrl+C), terminating.\n");
-    exit(0);
+    // exit(0);
+    // kill(getpid(), SIGKILL);
 }
 
 void handle_sigusr1(int sig) {
@@ -53,8 +54,9 @@ int main()
 
             // Keep the child process running until SIGINT is caught
             while(1) {
-                sleep(5);
+                sleep(2);
             }
+            // raise(SIGINT);
         }
     } 
     else {
